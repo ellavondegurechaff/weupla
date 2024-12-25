@@ -22,13 +22,32 @@ export function CartSidebar({ isCartOpen, setIsCartOpen, activePage }) {
 
   const copyCartToClipboard = () => {
     const cartText = cart.map(item => (
-      `${item.name} x${item.quantity}\n` +
-      `  Intown: $${formatPrice(item.intown_price * item.quantity)}\n` +
-      `  Shipped: $${formatPrice(item.shipped_price * item.quantity)}`
+      `${item.name}\n` +
+      `Quantity: ${item.quantity}\n` +
+      `------------------\n` +
+      `Intown Price: $${formatPrice(item.intown_price)} × ${item.quantity}\n` +
+      `Intown Total: $${formatPrice(item.intown_price * item.quantity)}\n` +
+      `------------------\n` +
+      `Shipped Price: $${formatPrice(item.shipped_price)} × ${item.quantity}\n` +
+      `Shipped Total: $${formatPrice(item.shipped_price * item.quantity)}\n` +
+      `==================`
     )).join('\n\n')
     
-    const totalText = `\nIntown Total: $${formatPrice(getTotalPrice().intown)}\nShipped Total: $${formatPrice(getTotalPrice().shipped)}`
-    const fullText = `Your Order:\n${cartText}${totalText}`
+    const totals = getTotalPrice()
+    const totalText = 
+      `\n\nORDER SUMMARY\n` +
+      `==================\n` +
+      `Total Items: ${cart.reduce((sum, item) => sum + item.quantity, 0)}\n` +
+      `Intown Total: $${formatPrice(totals.intown)}\n` +
+      `Shipped Total: $${formatPrice(totals.shipped)}\n` +
+      `==================`
+
+    const fullText = 
+      `🛒 NEW ORDER REQUEST\n` +
+      `==================\n\n` +
+      `ITEMS:\n` +
+      `==================\n` +
+      `${cartText}${totalText}`
 
     navigator.clipboard.writeText(fullText)
       .then(() => {
@@ -37,7 +56,6 @@ export function CartSidebar({ isCartOpen, setIsCartOpen, activePage }) {
           'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform transition-all duration-300 z-[170] cursor-pointer'
         notification.textContent = 'Order details copied to clipboard!'
         
-        // Add click handler to dismiss notification
         notification.addEventListener('click', () => {
           notification.style.opacity = '0'
           setTimeout(() => {
@@ -47,7 +65,6 @@ export function CartSidebar({ isCartOpen, setIsCartOpen, activePage }) {
 
         document.body.appendChild(notification)
         
-        // Auto dismiss after 3 seconds
         setTimeout(() => {
           if (document.body.contains(notification)) {
             notification.style.opacity = '0'

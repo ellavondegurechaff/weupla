@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Lock, AlertTriangle, ArrowRight } from 'lucide-react'
+import { IntroFade } from './Introfade'
 
 export function AgeLanding({ onVerified }) {
+  const [showIntro, setShowIntro] = useState(true)
   const [step, setStep] = useState('initial') // initial, verify, password
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -13,6 +15,7 @@ export function AgeLanding({ onVerified }) {
     // Check if user was previously verified
     const verified = localStorage.getItem('ageVerified')
     if (verified === 'true') {
+      setShowIntro(false) // Skip intro for verified users
       onVerified(true)
     }
   }, [onVerified])
@@ -46,6 +49,10 @@ export function AgeLanding({ onVerified }) {
     }, 2000)
   }
 
+  if (showIntro) {
+    return <IntroFade onComplete={() => setShowIntro(false)} />
+  }
+
   return (
     <div className="min-h-screen relative flex items-center justify-center bg-gradient-to-br from-orange-800 via-orange-600 to-orange-700 px-4">
       {/* Animated Background */}
@@ -53,7 +60,7 @@ export function AgeLanding({ onVerified }) {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-20 scale-105"
           style={{ 
-            backgroundImage: "url('/products/landing-bg.jpg')",
+            backgroundImage: "url('/products/loading-bg.jpg')",
             animation: 'slow-pan 30s ease-in-out infinite alternate'
           }}
         />

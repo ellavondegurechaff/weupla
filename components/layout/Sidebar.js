@@ -29,12 +29,13 @@ export function Sidebar({ isMenuOpen, setIsMenuOpen, activePage, setActivePage }
       >
         <div className="h-full flex flex-col">
           {/* Logo container */}
-          <div className="h-16 flex items-center justify-center px-4">
+          <div className="h-16 flex items-center px-4 space-x-3 border-b border-white/10">
             <img 
               src="/products/logo.png"
               alt="WeUpLa Logo"
-              className="h-9 md:h-10 w-auto"
+              className="h-8 w-auto"
             />
+            <h1 className="text-xl font-bold text-white">WeUpLA</h1>
           </div>
           
           <nav className="flex-1 overflow-y-auto">

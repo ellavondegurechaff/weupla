@@ -176,14 +176,8 @@ export default function Shop() {
         handleSearchChange={handleSearchChange}
       >
         {activePage === 'home' && (
-          <div className="h-[calc(100vh-5rem)] max-w-4xl mx-auto">
-            <div className="hidden md:grid md:grid-rows-[auto_1fr_1fr_1fr] md:gap-4 py-4">
-              <Hero />
-              <InfoCards />
-              <PaymentMethods />
-              <Services />
-            </div>
-            <div className="md:hidden flex flex-col gap-3 py-2 overflow-y-auto h-full">
+          <div className="min-h-[calc(100vh-4rem)] max-w-4xl mx-auto overflow-y-auto px-4">
+            <div className="py-4 space-y-6 md:space-y-8">
               <Hero />
               <InfoCards />
               <PaymentMethods />

@@ -2,9 +2,9 @@ import { Truck, Clock } from 'lucide-react'
 
 export function InfoCards() {
   return (
-    <div className="grid md:grid-cols-2 gap-8 mb-16">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
       {/* Shipping Card */}
-      <div className="group bg-black/30 backdrop-blur-md rounded-2xl p-8 transform transition-all duration-300 hover:scale-105">
+      <div className="group bg-black/30 backdrop-blur-md rounded-2xl p-6 md:p-8 transform transition-all duration-300 hover:scale-105">
         <div className="flex items-center space-x-4 mb-4">
           <div className="p-3 bg-orange-500/10 rounded-xl">
             <Truck size={24} className="text-orange-500" />
@@ -19,7 +19,7 @@ export function InfoCards() {
       </div>
 
       {/* Hours Card */}
-      <div className="group bg-black/30 backdrop-blur-md rounded-2xl p-8 transform transition-all duration-300 hover:scale-105">
+      <div className="group bg-black/30 backdrop-blur-md rounded-2xl p-6 md:p-8 transform transition-all duration-300 hover:scale-105">
         <div className="flex items-center space-x-4 mb-4">
           <div className="p-3 bg-orange-500/10 rounded-xl">
             <Clock size={24} className="text-orange-500" />

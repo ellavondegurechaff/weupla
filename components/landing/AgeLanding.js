@@ -166,10 +166,26 @@ export function AgeLanding({ onVerified }) {
                   <button
                     type="button"
                     onClick={() => setStep('initial')}
-                    className="w-full text-sm text-gray-400 hover:text-white transition-colors"
+                    className="w-full text-sm text-gray-400 hover:text-white transition-colors mb-3"
                   >
                     Go back
                   </button>
+
+                  <a
+                    href="signal://+1234567890"
+                    className="w-full flex items-center justify-center space-x-2 px-4 py-2.5 
+                      bg-[#3A76F0] hover:bg-[#2856C9]
+                      rounded-xl transition-all duration-300 transform hover:scale-102 text-sm"
+                  >
+                    <svg 
+                      className="w-5 h-5" 
+                      viewBox="0 0 256 256" 
+                      fill="currentColor"
+                    >
+                      <path d="M128,24A104,104,0,0,0,36.18,176.88L24.83,219.75a16,16,0,0,0,11.42,19.52,16.2,16.2,0,0,0,4.05.52,16,16,0,0,0,15.47-11.94l11.35-42.87A104,104,0,1,0,128,24ZM128,216a88,88,0,0,1-88-88c0-48.35,39.65-88,88-88s88,39.65,88,88C216,176.35,176.35,216,128,216Z"/>
+                    </svg>
+                    <span>Verify on Signal for password</span>
+                  </a>
                 </motion.form>
               )}
             </AnimatePresence>

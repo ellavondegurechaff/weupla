@@ -21,12 +21,15 @@ export function FilterModal({
   ]
 
   return (
-    <div className="fixed inset-0 z-[150]">
+    <div className="fixed inset-0 z-[200] md:pt-28 pt-32">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
       
-      <div className="absolute inset-x-0 bottom-0 md:relative md:inset-auto md:mx-auto 
-        bg-gray-900 md:rounded-xl md:max-w-md md:my-8 md:mx-4 max-h-[85vh] flex flex-col">
-        <div className="flex justify-between items-center p-4 border-b border-gray-700/50">
+      <div className="absolute inset-x-0 bottom-0 md:relative md:mx-auto 
+        bg-gray-900 md:rounded-xl md:max-w-md md:mx-4 
+        max-h-[80vh] md:max-h-[calc(100vh-8rem)] 
+        flex flex-col overflow-hidden shadow-xl">
+        
+        <div className="flex justify-between items-center p-4 border-b border-gray-700/50 bg-gray-900 sticky top-0">
           <h2 className="text-lg font-semibold">Filters</h2>
           <button onClick={onClose} className="p-1.5 hover:text-orange-500">
             <X size={18} />
@@ -74,11 +77,10 @@ export function FilterModal({
           </div>
         </div>
 
-        <div className="p-4 border-t border-gray-700/50">
+        <div className="p-4 border-t border-gray-700/50 bg-gray-900 sticky bottom-0">
           <button
             onClick={onClearFilters}
-            className="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 
-              transition-colors flex items-center justify-center"
+            className="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition-colors"
           >
             Clear Filters
           </button>

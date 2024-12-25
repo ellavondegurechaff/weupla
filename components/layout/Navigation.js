@@ -28,7 +28,7 @@ export function Navigation({
         <div className="flex flex-col">
           {/* Top bar */}
           <div className="flex justify-between h-16 items-center px-4">
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 w-64">
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className="p-1.5 hover:bg-white/10 rounded-lg transition-colors"
@@ -36,11 +36,13 @@ export function Navigation({
               >
                 <Menu size={18} />
               </button>
-              <img 
-                src="/products/logo.png"
-                alt="WeUpLa Logo"
-                className="h-9 md:h-10 w-auto"
-              />
+              {!isMenuOpen && (
+                <img 
+                  src="/products/logo.png"
+                  alt="WeUpLa Logo"
+                  className="h-9 md:h-10 w-auto"
+                />
+              )}
             </div>
 
             {/* Only render search on client-side */}

@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Lock, AlertTriangle, ArrowRight } from 'lucide-react'
-import { IntroFade } from './IntroFade'
 
 export function AgeLanding({ onVerified }) {
-  const [showIntro, setShowIntro] = useState(true)
   const [step, setStep] = useState('initial') // initial, verify, password
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
@@ -15,7 +13,6 @@ export function AgeLanding({ onVerified }) {
     // Check if user was previously verified
     const verified = localStorage.getItem('ageVerified')
     if (verified === 'true') {
-      setShowIntro(false) // Skip intro for verified users
       onVerified(true)
     }
   }, [onVerified])
@@ -47,10 +44,6 @@ export function AgeLanding({ onVerified }) {
     setTimeout(() => {
       window.location.href = 'https://www.google.com'
     }, 2000)
-  }
-
-  if (showIntro) {
-    return <IntroFade onComplete={() => setShowIntro(false)} />
   }
 
   return (

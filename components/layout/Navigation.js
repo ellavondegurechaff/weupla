@@ -1,5 +1,6 @@
 import { Menu, ShoppingCart, Search, Filter } from 'lucide-react'
 import useCartStore from '@/store/cartStore'
+import { useState, useEffect } from 'react'
 
 export function Navigation({ 
   isMenuOpen, 
@@ -13,6 +14,13 @@ export function Navigation({
   setIsFilterOpen
 }) {
   const cart = useCartStore(state => state.cart)
+  
+  // Add useEffect for client-side rendering
+  const [isMounted, setIsMounted] = useState(false)
+  
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
   
   return (
     <nav className="bg-black/30 backdrop-blur-md text-white fixed w-full z-[100] border-b border-white/10">
@@ -35,8 +43,8 @@ export function Navigation({
               />
             </div>
 
-            {/* Desktop Search */}
-            {activePage === 'products' && (
+            {/* Only render search on client-side */}
+            {isMounted && activePage === 'products' && (
               <div className="hidden md:flex flex-1 max-w-md mx-8 items-center space-x-2">
                 <div className="relative flex-1">
                   <input
@@ -64,7 +72,7 @@ export function Navigation({
               className="p-1.5 hover:bg-white/10 rounded-lg transition-colors relative"
             >
               <ShoppingCart size={18} />
-              {cart.length > 0 && (
+              {isMounted && cart.length > 0 && (
                 <span className="absolute -top-1 -right-1 bg-orange-500 text-white rounded-full w-4 h-4 text-xs flex items-center justify-center">
                   {cart.length}
                 </span>
@@ -73,7 +81,7 @@ export function Navigation({
           </div>
 
           {/* Mobile Search - Compact Version */}
-          {activePage === 'products' && (
+          {isMounted && activePage === 'products' && (
             <div className="md:hidden px-4 pb-2">
               <div className="flex space-x-2">
                 <div className="relative flex-1">

@@ -12,6 +12,7 @@ import { FaqContent } from '@/components/faq/FaqContent'
 import { useSearch } from '@/hooks/useSearch'
 import { Toast } from '@/components/shared/Toast'
 import useToastStore from '@/store/toastStore'
+import { LoadingIndicator } from '@/components/shared/LoadingIndicator'
 
 export default function Shop() {
   const router = useRouter()
@@ -26,12 +27,7 @@ export default function Shop() {
   const [isFilterOpen, setIsFilterOpen] = useState(false)
   const { message, isVisible } = useToastStore()
   
-  const [activePage, setActivePage] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem('activePage') || 'home'
-    }
-    return 'home'
-  })
+  const [activePage, setActivePage] = useState('home')
 
   // Authorization check
   useEffect(() => {
@@ -121,7 +117,48 @@ export default function Shop() {
   }, [router.query.page])
 
   if (isLoading || !isAuthorized || isPageLoading) {
-    return null
+    return (
+      <Layout
+        isMenuOpen={isMenuOpen}
+        setIsMenuOpen={setIsMenuOpen}
+        isCartOpen={isCartOpen}
+        setIsCartOpen={setIsCartOpen}
+        activePage={activePage}
+        setActivePage={setActivePage}
+        isFilterOpen={isFilterOpen}
+        setIsFilterOpen={setIsFilterOpen}
+        inputValue={inputValue}
+        handleSearchChange={handleSearchChange}
+      >
+        <div className="flex-1 px-4 py-8">
+          <div className="max-w-7xl mx-auto">
+            {activePage === 'home' && (
+              <div className="max-w-4xl mx-auto space-y-6">
+                <div className="animate-pulse space-y-4">
+                  <div className="h-48 bg-white/5 rounded-xl" />
+                  <div className="h-32 bg-white/5 rounded-xl" />
+                  <div className="h-32 bg-white/5 rounded-xl" />
+                </div>
+              </div>
+            )}
+            {activePage === 'products' && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {[...Array(8)].map((_, i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="aspect-square bg-white/5 rounded-lg mb-4" />
+                    <div className="h-4 bg-white/5 rounded mb-2" />
+                    <div className="h-3 bg-white/5 rounded w-2/3" />
+                  </div>
+                ))}
+              </div>
+            )}
+            <div className="fixed bottom-8 left-1/2 -translate-x-1/2">
+              <LoadingIndicator />
+            </div>
+          </div>
+        </div>
+      </Layout>
+    )
   }
 
   return (

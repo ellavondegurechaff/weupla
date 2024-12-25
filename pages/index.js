@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { AgeLanding } from '@/components/landing/AgeLanding'
 import { useRouter } from 'next/router'
+import { LoadingIndicator } from '@/components/shared/LoadingIndicator'
 
 export default function Home() {
   const [isVerified, setIsVerified] = useState(false)
@@ -22,7 +23,11 @@ export default function Home() {
   }
 
   if (isLoading) {
-    return null
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <LoadingIndicator />
+      </div>
+    )
   }
 
   return <AgeLanding onVerified={handleVerified} />

@@ -1,4 +1,20 @@
+import { fileURLToPath } from 'url'
+import { dirname } from 'path'
+import * as dotenv from 'dotenv'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
+dotenv.config({ path: dirname(__dirname) + '/.env' })
+
 import { query } from './db.mjs'
+
+// Add debug logging for all env variables
+console.log('Environment variables loaded:', {
+  dbHost: process.env.DB_HOST,
+  dbUser: process.env.DB_USER,
+  dbName: process.env.DB_NAME,
+  dbPort: process.env.DB_PORT
+})
 
 async function createTables() {
   try {

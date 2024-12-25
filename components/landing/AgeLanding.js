@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Lock, AlertTriangle, ArrowRight } from 'lucide-react'
-import { IntroFade } from './Introfade'
+import { IntroFade } from './IntroFade'
 
 export function AgeLanding({ onVerified }) {
   const [showIntro, setShowIntro] = useState(true)

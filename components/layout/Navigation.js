@@ -31,7 +31,7 @@ export function Navigation({
               <img 
                 src="/products/logo.png"
                 alt="WeUpLa Logo"
-                className="h-7 w-auto"
+                className="h-9 md:h-10 w-auto"
               />
             </div>
 

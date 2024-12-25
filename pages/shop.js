@@ -13,6 +13,7 @@ import { useSearch } from '@/hooks/useSearch'
 import { Toast } from '@/components/shared/Toast'
 import useToastStore from '@/store/toastStore'
 import { LoadingIndicator } from '@/components/shared/LoadingIndicator'
+import { ProofOfSalesGrid } from '@/components/touchdown/ProofOfSalesGrid'
 
 export default function Shop() {
   const router = useRouter()
@@ -205,6 +206,13 @@ export default function Shop() {
         {activePage === 'about' && <AboutContent />}
         {activePage === 'contact' && <ContactContent />}
         {activePage === 'faq' && <FaqContent />}
+        {activePage === 'proof-of-sales' && (
+          <ProofOfSalesGrid
+            displayedProofs={[]} // Add your proof data here
+            isLoading={false}
+            loadMoreRef={loadMoreRef}
+          />
+        )}
       </Layout>
       <Toast message={message} isVisible={isVisible} />
     </>

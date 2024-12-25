@@ -1,11 +1,36 @@
-import { Home, ShoppingCart, Info, MessageCircle, HelpCircle } from 'lucide-react'
+import { Home, Package, Info, Phone, HelpCircle, Target } from 'lucide-react'
 
 export const navigationLinks = [
-  { id: 'home', label: 'Home', icon: Home },
-  { id: 'products', label: 'Products', icon: ShoppingCart },
-  { id: 'about', label: 'About Us', icon: Info },
-  { id: 'contact', label: 'Contact Us', icon: MessageCircle },
-  { id: 'faq', label: 'FAQ', icon: HelpCircle },
+  {
+    id: 'home',
+    label: 'Home',
+    icon: Home
+  },
+  {
+    id: 'products',
+    label: 'Products',
+    icon: Package
+  },
+  {
+    id: 'proof-of-sales',
+    label: 'Touchdown',
+    icon: Target
+  },
+  {
+    id: 'about',
+    label: 'About',
+    icon: Info
+  },
+  {
+    id: 'contact',
+    label: 'Contact',
+    icon: Phone
+  },
+  {
+    id: 'faq',
+    label: 'FAQ',
+    icon: HelpCircle
+  }
 ]
 
 export const products = [

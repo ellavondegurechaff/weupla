@@ -1,7 +1,17 @@
+import { useState } from 'react'
 import { navigationLinks } from '@/utils/constants'
-import { Menu } from 'lucide-react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 
 export function Sidebar({ isMenuOpen, setIsMenuOpen, activePage, setActivePage }) {
+  const [expandedItems, setExpandedItems] = useState({})
+
+  const toggleExpanded = (id) => {
+    setExpandedItems(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }))
+  }
+
   return (
     <>
       {/* Overlay */}
@@ -18,7 +28,7 @@ export function Sidebar({ isMenuOpen, setIsMenuOpen, activePage, setActivePage }
           top-0 h-full transition-transform duration-300 ease-in-out z-[160]`}
       >
         <div className="h-full flex flex-col">
-          {/* Logo container with same height as navigation */}
+          {/* Logo container */}
           <div className="h-16 flex items-center justify-center px-4">
             <img 
               src="/products/logo.png"
@@ -29,18 +39,46 @@ export function Sidebar({ isMenuOpen, setIsMenuOpen, activePage, setActivePage }
           
           <nav className="flex-1 overflow-y-auto">
             {navigationLinks.map(link => (
-              <button
-                key={link.id}
-                onClick={() => {
-                  setActivePage(link.id)
-                  setIsMenuOpen(false)
-                }}
-                className={`w-full flex items-center space-x-3 px-6 py-3 transition-colors
-                  ${activePage === link.id ? 'text-orange-500 bg-orange-500/10' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
-              >
-                <link.icon size={20} />
-                <span>{link.label}</span>
-              </button>
+              <div key={link.id}>
+                <button
+                  onClick={() => {
+                    if (link.children) {
+                      toggleExpanded(link.id)
+                    } else {
+                      setActivePage(link.id)
+                      setIsMenuOpen(false)
+                    }
+                  }}
+                  className={`w-full flex items-center justify-between px-6 py-3 transition-colors
+                    ${activePage === link.id ? 'text-orange-500 bg-orange-500/10' : 'text-gray-400 hover:text-white hover:bg-gray-800/50'}`}
+                >
+                  <div className="flex items-center space-x-3">
+                    <link.icon size={20} />
+                    <span>{link.label}</span>
+                  </div>
+                  {link.children && (
+                    expandedItems[link.id] ? <ChevronUp size={16} /> : <ChevronDown size={16} />
+                  )}
+                </button>
+
+                {/* Submenu items */}
+                {link.children && expandedItems[link.id] && (
+                  <div className="bg-gray-800/50 py-1">
+                    {link.children.map(child => (
+                      <button
+                        key={child.id}
+                        onClick={() => {
+                          setActivePage(child.id)
+                          setIsMenuOpen(false)
+                        }}
+                        className="w-full flex items-center px-12 py-2 text-sm text-gray-400 hover:text-white hover:bg-gray-800/50 transition-colors"
+                      >
+                        {child.label}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
         </div>

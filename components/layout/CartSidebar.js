@@ -1,9 +1,19 @@
 import { X, ShoppingCart, Plus, Minus, ArrowRight } from 'lucide-react'
 import useCartStore from '@/store/cartStore'
 import { CartItemImage } from './CartItemImage'
+import { useEffect, useState } from 'react'
 
 export function CartSidebar({ isCartOpen, setIsCartOpen, activePage }) {
+  const [isMounted, setIsMounted] = useState(false)
   const { cart, removeFromCart, updateQuantity, getTotalPrice, clearCart } = useCartStore()
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) {
+    return null
+  }
 
   const formatPrice = (price) => {
     const numPrice = typeof price === 'string' ? parseFloat(price) : price

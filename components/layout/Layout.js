@@ -21,6 +21,9 @@ export function Layout({ children, ...props }) {
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name="apple-mobile-web-app-title" content="WeUpLA" />
         <meta name="theme-color" content="#ea580c" />
+        <link rel="apple-touch-icon" sizes="152x152" href="/products/logo.png" />
+        <link rel="apple-touch-icon" sizes="167x167" href="/products/logo.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/products/logo.png" />
       </Head>
       <div className="min-h-screen flex flex-col bg-gradient-to-br from-orange-800 via-orange-600 to-orange-700 overflow-hidden">
         <Navigation {...props} />

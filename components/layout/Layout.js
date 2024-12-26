@@ -4,6 +4,7 @@ import { CartSidebar } from './CartSidebar'
 import { Toast } from '@/components/shared/Toast'
 import useToastStore from '@/store/toastStore'
 import Head from 'next/head'
+import { AddToHomeScreen } from '@/components/shared/AddToHomeScreen'
 
 export function Layout({ children, ...props }) {
   const { message, isVisible } = useToastStore()

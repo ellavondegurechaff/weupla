@@ -1,12 +1,38 @@
-import React from 'react';
+import React from 'react'
+import { 
+  SiCashapp, 
+  SiZelle, 
+  SiBitcoin 
+} from 'react-icons/si'
+import { FaMoneyBill } from 'react-icons/fa'
 
 export function PaymentMethods() {
   const paymentMethods = [
-    { method: 'Cashapp', fee: '5%', icon: '💳', bgColor: 'from-green-500/20 to-green-700/20' },
-    { method: 'Zelle', fee: '5%', icon: '💸', bgColor: 'from-purple-500/20 to-purple-700/20' },
-    { method: 'Crypto', fee: '4%', icon: '₿', bgColor: 'from-orange-500/20 to-orange-700/20' },
-    { method: 'Cash', fee: '0%', icon: '💵', bgColor: 'from-blue-500/20 to-blue-700/20' }
-  ];
+    { 
+      method: 'Cashapp', 
+      fee: '5%', 
+      icon: <SiCashapp className="w-8 h-8" />, 
+      bgColor: 'from-green-500/20 to-green-700/20' 
+    },
+    { 
+      method: 'Zelle', 
+      fee: '5%', 
+      icon: <SiZelle className="w-8 h-8" />, 
+      bgColor: 'from-purple-500/20 to-purple-700/20' 
+    },
+    { 
+      method: 'Crypto', 
+      fee: '4%', 
+      icon: <SiBitcoin className="w-8 h-8" />, 
+      bgColor: 'from-orange-500/20 to-orange-700/20' 
+    },
+    { 
+      method: 'Cash', 
+      fee: '0%', 
+      icon: <FaMoneyBill className="w-8 h-8" />, 
+      bgColor: 'from-blue-500/20 to-blue-700/20' 
+    }
+  ]
 
   return (
     <div className="relative overflow-hidden rounded-2xl p-4 md:p-6">
@@ -26,7 +52,7 @@ export function PaymentMethods() {
               <div className={`absolute inset-0 bg-gradient-to-br ${payment.bgColor} opacity-50 group-hover:opacity-75 transition-opacity duration-300`} />
               
               <div className="relative p-4 md:p-6 bg-black/20 h-full flex flex-col items-center justify-center space-y-3 group-hover:transform group-hover:scale-105 transition-transform duration-300">
-                <div className="text-3xl md:text-4xl mb-2 transform group-hover:scale-110 transition-transform duration-300">
+                <div className="text-white transform group-hover:scale-110 transition-transform duration-300">
                   {payment.icon}
                 </div>
                 <div className="font-semibold text-base md:text-lg text-white">
@@ -41,5 +67,5 @@ export function PaymentMethods() {
         </div>
       </div>
     </div>
-  );
+  )
 }

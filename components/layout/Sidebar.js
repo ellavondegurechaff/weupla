@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import { navigationLinks } from '@/utils/constants'
 import { ChevronDown, ChevronUp } from 'lucide-react'
+import { useAddToHomeScreen, AddToHomeScreenPrompt } from '@/components/shared/AddToHomeScreen'
 
 export function Sidebar({ isMenuOpen, setIsMenuOpen, activePage, setActivePage }) {
   const [expandedItems, setExpandedItems] = useState({})
   const [isMobile, setIsMobile] = useState(false)
+  const { showPrompt, isIOS, triggerPrompt, handleInstallClick, dismissPrompt } = useAddToHomeScreen()
 
   useEffect(() => {
     const checkMobile = () => {
@@ -22,6 +24,15 @@ export function Sidebar({ isMenuOpen, setIsMenuOpen, activePage, setActivePage }
       ...prev,
       [id]: !prev[id]
     }))
+  }
+
+  const handleSocialClick = (e, defaultAction) => {
+    if (isMobile) {
+      e.preventDefault()
+      triggerPrompt()
+    } else {
+      defaultAction()
+    }
   }
 
   return (
@@ -105,8 +116,7 @@ export function Sidebar({ isMenuOpen, setIsMenuOpen, activePage, setActivePage }
                 <div className="flex justify-center space-x-4">
                   <a
                     href="https://t.me/weupla"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    onClick={(e) => handleSocialClick(e, () => window.open('https://t.me/weupla', '_blank'))}
                     className="p-2 rounded-full hover:bg-gray-800/50 transition-colors"
                   >
                     <svg className="w-6 h-6 text-[#229ED9]" viewBox="0 0 24 24" fill="currentColor">
@@ -115,6 +125,7 @@ export function Sidebar({ isMenuOpen, setIsMenuOpen, activePage, setActivePage }
                   </a>
                   <a
                     href="signal://+1234567890"
+                    onClick={(e) => handleSocialClick(e, () => window.location.href = 'signal://+1234567890')}
                     className="p-2 rounded-full hover:bg-gray-800/50 transition-colors"
                   >
                     <svg className="w-6 h-6 text-[#3A76F0]" viewBox="0 0 256 256" fill="currentColor">
@@ -127,6 +138,12 @@ export function Sidebar({ isMenuOpen, setIsMenuOpen, activePage, setActivePage }
           )}
         </div>
       </div>
+      <AddToHomeScreenPrompt
+        showPrompt={showPrompt}
+        isIOS={isIOS}
+        handleInstallClick={handleInstallClick}
+        dismissPrompt={dismissPrompt}
+      />
     </>
   )
 } 

@@ -1,34 +1,30 @@
 import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 
-export function AddToHomeScreen() {
+export function useAddToHomeScreen() {
   const [showPrompt, setShowPrompt] = useState(false)
   const [deferredPrompt, setDeferredPrompt] = useState(null)
   const [isIOS, setIsIOS] = useState(false)
 
   useEffect(() => {
-    // Check if it's iOS
     const isIOSDevice = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream
     setIsIOS(isIOSDevice)
 
-    // Handle PWA install prompt for Android
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault()
       setDeferredPrompt(e)
-      setShowPrompt(true)
     })
 
-    // Check if already installed
     if (window.matchMedia('(display-mode: standalone)').matches) {
       setShowPrompt(false)
     }
-
-    // Hide prompt if already dismissed
-    const hasPromptBeenShown = localStorage.getItem('pwaPromptDismissed')
-    if (hasPromptBeenShown) {
-      setShowPrompt(false)
-    }
   }, [])
+
+  const triggerPrompt = () => {
+    if (!localStorage.getItem('pwaPromptDismissed')) {
+      setShowPrompt(true)
+    }
+  }
 
   const handleInstallClick = async () => {
     if (deferredPrompt) {
@@ -46,6 +42,16 @@ export function AddToHomeScreen() {
     localStorage.setItem('pwaPromptDismissed', 'true')
   }
 
+  return {
+    showPrompt,
+    isIOS,
+    triggerPrompt,
+    handleInstallClick,
+    dismissPrompt
+  }
+}
+
+export function AddToHomeScreenPrompt({ showPrompt, isIOS, handleInstallClick, dismissPrompt }) {
   if (!showPrompt) return null
 
   return (

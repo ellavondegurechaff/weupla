@@ -122,11 +122,6 @@ export function Sidebar({ isMenuOpen, setIsMenuOpen, activePage, setActivePage }
           {socialLinks}
         </div>
       </div>
-      
-      {/* Desktop social links - fixed position */}
-      <div className="fixed bottom-4 left-4 z-[140] hidden md:block">
-        {socialLinks}
-      </div>
     </>
   )
 } 

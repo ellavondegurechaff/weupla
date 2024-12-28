@@ -27,12 +27,12 @@ export function FilterModal({
       <div className="absolute inset-x-0 top-[calc(4rem+2.5rem)] md:top-28 bottom-0 
         md:relative md:mx-auto md:mt-16 md:max-w-md">
         
-        <div className="h-full md:h-auto bg-gray-900 md:rounded-xl 
+        <div className="h-full md:h-auto bg-white md:rounded-xl 
           flex flex-col overflow-hidden shadow-xl">
           
-          <div className="flex justify-between items-center p-4 border-b border-gray-700/50">
-            <h2 className="text-lg font-semibold">Filters</h2>
-            <button onClick={onClose} className="p-1.5 hover:text-orange-500">
+          <div className="flex justify-between items-center p-4 border-b border-gray-200">
+            <h2 className="text-lg font-semibold text-gray-900">Filters</h2>
+            <button onClick={onClose} className="p-1.5 text-gray-500 hover:text-[#e35522]">
               <X size={18} />
             </button>
           </div>
@@ -41,36 +41,36 @@ export function FilterModal({
             <div className="p-4 space-y-6">
               <div className="space-y-3">
                 <div>
-                  <h3 className="font-medium mb-3">Filter By Category</h3>
+                  <h3 className="font-medium text-gray-900 mb-3">Filter By Category</h3>
                   <div className="grid grid-cols-1 gap-2">
                     {categories.map(category => (
-                      <label key={category.id} className="flex items-center space-x-2 p-2 bg-gray-800/50 rounded-lg">
+                      <label key={category.id} className="flex items-center space-x-2 p-2 bg-gray-50 rounded-lg hover:bg-gray-100">
                         <input
                           type="checkbox"
                           checked={selectedCategories.includes(category.id)}
                           onChange={() => onCategoryChange(category.id)}
-                          className="rounded border-gray-600 text-orange-500 focus:ring-orange-500"
+                          className="rounded border-gray-300 text-[#e35522] focus:ring-[#e35522]"
                         />
-                        <span className="text-sm">{category.name}</span>
+                        <span className="text-sm text-gray-700">{category.name}</span>
                       </label>
                     ))}
                   </div>
                 </div>
 
                 <div>
-                  <h3 className="font-medium mb-3">Sort By</h3>
+                  <h3 className="font-medium text-gray-900 mb-3">Sort By</h3>
                   <div className="space-y-2">
                     {sortOptions.map(option => (
-                      <label key={option.id} className="flex items-center space-x-2 p-2">
+                      <label key={option.id} className="flex items-center space-x-2 p-2 hover:bg-gray-50 rounded-lg">
                         <input
                           type="radio"
                           name="sort"
                           value={option.id}
                           checked={sortOrder === option.id}
                           onChange={(e) => onSortChange(e.target.value)}
-                          className="text-orange-500 focus:ring-orange-500"
+                          className="text-[#e35522] focus:ring-[#e35522]"
                         />
-                        <span className="text-sm">{option.label}</span>
+                        <span className="text-sm text-gray-700">{option.label}</span>
                       </label>
                     ))}
                   </div>
@@ -79,11 +79,11 @@ export function FilterModal({
             </div>
           </div>
 
-          <div className="p-4 border-t border-gray-700/50">
+          <div className="p-4 border-t border-gray-200">
             <button
               onClick={onClearFilters}
-              className="w-full bg-orange-500 text-white py-2 rounded-lg 
-                hover:bg-orange-600 transition-colors"
+              className="w-full bg-[#e35522] text-white py-2 rounded-lg 
+                hover:bg-[#d14918] transition-colors"
             >
               Clear Filters
             </button>

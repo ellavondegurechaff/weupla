@@ -12,6 +12,16 @@ export default {
         foreground: "var(--foreground)",
       },
     },
+    fontFamily: {
+      sans: [
+        "Helvetica Neue",
+        "Helvetica",
+        "-apple-system",
+        "BlinkMacSystemFont",
+        "Arial",
+        "sans-serif",
+      ],
+    },
   },
   plugins: [],
 };

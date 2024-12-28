@@ -25,18 +25,30 @@ export function Layout({ children, ...props }) {
         <link rel="apple-touch-icon" sizes="167x167" href="/products/logo.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/products/logo.png" />
       </Head>
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-orange-800 via-orange-600 to-orange-700 overflow-hidden">
-        <Navigation {...props} />
-        <Sidebar {...props} />
-        <CartSidebar {...props} />
-        
-        <main className={`flex-1 ${props.activePage === 'products' ? 'pt-28 md:pt-20' : 'pt-16'} relative z-10`}>
-          <div className="max-w-7xl mx-auto h-full">
-            {children}
-          </div>
-        </main>
+      <div className="min-h-screen flex flex-col relative">
+        {/* Background Image */}
+        <div className="fixed inset-0 z-0">
+          <img
+            src="/products/desktop_bg.png" // Add your background image to the public folder
+            alt="Background"
+            className="w-full h-full object-cover"
+          />
+        </div>
 
-        <Toast message={message} isVisible={isVisible} />
+        {/* Content */}
+        <div className="relative z-10 flex flex-col min-h-screen">
+          <Navigation {...props} />
+          <Sidebar {...props} />
+          <CartSidebar {...props} />
+          
+          <main className={`flex-1 ${props.activePage === 'products' ? 'pt-28 md:pt-20' : 'pt-16'}`}>
+            <div className="max-w-7xl mx-auto h-full">
+              {children}
+            </div>
+          </main>
+
+          <Toast message={message} isVisible={isVisible} />
+        </div>
       </div>
     </>
   )

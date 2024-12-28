@@ -16,7 +16,7 @@ export function Hero() {
           </div>
           
           <div className="text-center space-y-2">
-            <h1 className="text-2xl md:text-3xl font-bold text-orange-300 tracking-tight">
+            <h1 className="text-2xl md:text-3xl font-bold text-orange-300 tracking-tight antialiased">
               Menu Updated Daily. Over 100+ Flavors
             </h1>
             <p className="text-sm md:text-base text-gray-300 max-w-2xl mx-auto leading-relaxed">

@@ -60,11 +60,23 @@ export function Sidebar({ isMenuOpen, setIsMenuOpen, activePage, setActivePage }
       <div 
         className={`fixed top-0 left-0 w-64 h-full bg-white transform 
           ${isMenuOpen ? 'translate-x-0' : '-translate-x-full'}
-          transition-transform duration-300 ease-in-out z-[140] overflow-hidden
-          font-['Helvetica_Neue']`}
+          transition-transform duration-300 ease-in-out z-[140] overflow-hidden`}
       >
-        <div className="h-full flex flex-col pt-16">
-          <nav className="flex-1 overflow-y-auto">
+        <div className="h-full flex flex-col">
+          {/* Logo and Title - Updated with transparent background */}
+          <div className="bg-black/30 backdrop-blur-md px-6 h-16 flex items-center">
+            <div className="flex items-center space-x-3">
+              <img 
+                src="/products/logo.png" 
+                alt="WeUpLA Logo" 
+                className="h-12 w-12 object-contain"
+              />
+              <span className="text-2xl font-bold text-white">WeUpLA</span>
+            </div>
+          </div>
+
+          {/* Navigation Links */}
+          <nav className="flex-1 overflow-y-auto border-t border-white/10">
             {navigationLinks.map(link => (
               <div key={link.id}>
                 <button
